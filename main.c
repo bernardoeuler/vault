@@ -18,15 +18,15 @@ int main() {
     unsigned short password_invalid = 1;
 
     while (password_invalid) {
-        printf("Digite a combinação de %hu dígitos para abrir o cofre: ", PASSWORD_LENGTH);
+        printf("Type the %hu digits combination to open the vault: ", PASSWORD_LENGTH);
         fgets(input, INPUT_LENGTH, stdin);
         printf("\n");
 
         validation_result = validate_input(input);
         
         if (validation_result) {
-            printf("Entrada inválida. Tente novamente.\n");
-            printf("A entrada deve ser do formato \"x y z\".\n\n");
+            printf("Invalid input. Try again.\n");
+            printf("The input must be of the format \"x y z\".\n\n");
             if (validation_result == 1) flush_stdin();
             continue;
         }
@@ -40,7 +40,7 @@ int main() {
         password_invalid = verify_password(VAULT_PASSWORD, password);
     }
         
-    printf("Parabéns! Você abriu o cofre!\n");
+    printf("Congratulations! You opened the vault.\n");
 
     return 0;
 }
@@ -127,11 +127,11 @@ int verify_password(const unsigned short* target_password, unsigned short* passw
     // Give feedback to the user
     for (unsigned short i = 0; i < PASSWORD_LENGTH; i++) {
         if (correct_digits[i]) {
-            printf("O dígito %hu está correto na posição %u.\n", password[i], i + 1);
+            printf("The digit %hu is correct in the position %u.\n", password[i], i + 1);
         } else if (wrong_position_digits[i]) {
-            printf("O dígito %hu está correto, mas na posição errada.\n", password[i]);
+            printf("The digit %hu is correct, but in the wrong position.\n", password[i]);
         } else {
-            printf("O dígito %hu não faz parte da senha.\n", password[i]);
+            printf("The digit %hu doesn't belong to the password.\n", password[i]);
         }
     }
 
