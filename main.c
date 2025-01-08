@@ -29,8 +29,7 @@ int main() {
         validation_result = validate_input(input);
         
         if (validation_result) {
-            printf("Invalid input. Try again.\n");
-            printf("The input must be of the format \"x y z\".\n\n");
+            printf("Invalid input. Try again.\n\n");
             if (validation_result == 1) flush_stdin();
             continue;
         }
