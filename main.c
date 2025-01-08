@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #define PASSWORD_LENGTH 3
 #define INPUT_LENGTH PASSWORD_LENGTH * 2 + 1
@@ -9,13 +10,16 @@ int validate_input(char* input);
 unsigned short* get_password(char* input);
 int verify_password(const unsigned short* target_password, unsigned short* password);
 void flush_stdin();
+void generate_password(unsigned short* vault_password, unsigned short size);
 
 int main() {
-    const unsigned short VAULT_PASSWORD[PASSWORD_LENGTH] = {1, 0, 6};
+    unsigned short VAULT_PASSWORD[PASSWORD_LENGTH];
     char* input = malloc(INPUT_LENGTH);
     unsigned short* password;
     unsigned short validation_result;
     unsigned short password_invalid = 1;
+
+    generate_password(VAULT_PASSWORD, PASSWORD_LENGTH);
 
     while (password_invalid) {
         printf("Type the %hu digits combination to open the vault: ", PASSWORD_LENGTH);
@@ -151,4 +155,12 @@ int verify_password(const unsigned short* target_password, unsigned short* passw
 void flush_stdin() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
+}
+
+void generate_password(unsigned short* vault_password, unsigned short size) {
+    srand(time(NULL));
+
+    for (unsigned short i = 0; i < size; i++) {
+        vault_password[i] = rand() % 10;
+    }
 }
