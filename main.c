@@ -15,8 +15,9 @@ int main() {
     char* input = malloc(INPUT_LENGTH);
     unsigned short* password;
     unsigned short validation_result;
+    unsigned short password_invalid = 1;
 
-    while (1) {
+    while (password_invalid) {
         printf("Digite a combinação de %hu dígitos para abrir o cofre: ", PASSWORD_LENGTH);
         fgets(input, INPUT_LENGTH, stdin);
         printf("\n");
@@ -36,9 +37,7 @@ int main() {
 
         password = get_password(input);
 
-        if (!verify_password(VAULT_PASSWORD, password)) {
-            break;
-        }
+        password_invalid = verify_password(VAULT_PASSWORD, password);
     }
         
     printf("Parabéns! Você abriu o cofre!\n");
